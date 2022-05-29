@@ -11,6 +11,7 @@ function MakeContactsList(props) {
 
     const handleClick = (name) => {
         props.set(name.id)
+        props.setServer(name.server)
         props.setUpdateMessage(name.messages)
         props.setShowInput(false)
 

@@ -95,24 +95,50 @@ const useData = () => {
         return userLog;
     }
 
-    const setUserMassage = (user) => {
-        var userSendObject = {sendName : user.myNickName, message:user.message, time:user.time}
-        var dataMessage = getData({ Name: user.name })
-        if (user.myName in dataMessage.message){
-            dataMessage.message[user.myName].push(userSendObject)
-        } else {
-            dataMessage.message[user.myName] = [userSendObject]
-        }
-        setData(dataMessage)
+    // const setUserMassage = (user) => {
+    //     var userSendObject = {sendName : user.myNickName, message:user.message, time:user.time}
+    //     var dataMessage = getData({ Name: user.name })
+    //     if (user.myName in dataMessage.message){
+    //         dataMessage.message[user.myName].push(userSendObject)
+    //     } else {
+    //         dataMessage.message[user.myName] = [userSendObject]
+    //     }
+    //     setData(dataMessage)
 
-        dataMessage = getData({ Name: user.myName })
-        if (user.name in dataMessage.message){
-            dataMessage.message[user.name].push(userSendObject)
-        } else {
-            dataMessage.message[user.name] = [userSendObject]
-        }
-        setData(dataMessage)
+    //     dataMessage = getData({ Name: user.myName })
+    //     if (user.name in dataMessage.message){
+    //         dataMessage.message[user.name].push(userSendObject)
+    //     } else {
+    //         dataMessage.message[user.name] = [userSendObject]
+    //     }
+    //     setData(dataMessage)
+    // }
+
+
+    const setTransferMessage = (user) => {
+        let Url = "https://"+user.server+"/api/transfer";
+        let dataMessage = {
+            "from":user.myName,
+            "to":user.name,
+            "content":user.message.data
+        };
+        axios.post(Url, dataMessage,).then(response => response.status, setLocalData()).catch(err => console.warn(err));
     }
+
+    const setUserMassage = (user) => { 
+        let Url = "https://localhost:7092/api/contacts/"+user.name+"/messages";
+        let dataMessage = {
+            "content": user.message.data
+        };
+        axios.post(Url, dataMessage, {
+            params: {
+                username: user.myName,
+            }
+        }).then(response => response.status, setLocalData()).catch(err => console.warn(err));
+        setTransferMessage(user)
+        return 1
+    }
+
 
     const getUserMassage = (user) => {
         var data = getData({Name: user })
@@ -160,7 +186,7 @@ const useData = () => {
             to: ContactsName,
             server: myServer
         }
-        let Url = 'https://' + Contactserver + '/api/invitations';
+        let Url = 'https://localhost:7092/api/invitations';
         axios.post(Url, tempObjInvitation ).then(response => response.status).catch(err => console.warn(err));
     }
 
@@ -177,7 +203,7 @@ const useData = () => {
                 username: userName,
             }
         }).then(response => response.status, setLocalData()).catch(err => console.warn(err));
-        // setInitation(userName, ContactsName, Contactserver,myServer)
+        setInitation(userName, ContactsName, Contactserver,myServer)
     }
 
 

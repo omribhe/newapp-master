@@ -36,10 +36,10 @@ function ToastMessage(props) {
                             return <Toast id='my-toast'>
                                 <Toast.Header closeButton={false}>
                                     <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-                                    <strong className="me-auto">{message.sendName}</strong>
-                                    <small>send on - {message.time}</small>
+                                    <strong className="me-auto">{message.sent}</strong>
+                                    <small>send on - {message.created}</small>
                                 </Toast.Header>
-                                <Toast.Body>{handleText(message.message)}</Toast.Body>
+                                <Toast.Body>{handleText({ "type":"text", "data":message.content})}</Toast.Body>
                             </Toast>
                         })}
                     </ToastContainer>

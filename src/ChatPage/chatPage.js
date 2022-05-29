@@ -31,6 +31,8 @@ function ChatPage() {
 
     const [messages, setMessages] = useState([])
 
+    const [userChatServer, setUserChatServer] = useState()
+
 
     const doSearch = function (q) {
         // setFilterContacts(Contacts.filter((Contacts) => Contacts.includes(q)))
@@ -38,7 +40,6 @@ function ChatPage() {
     }
 
     const setUpdateMessage = function (userName) {
-        console.log(userName)
         setMessages(userName)
     }
 
@@ -47,13 +48,14 @@ function ChatPage() {
             timeNow = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
         let user = {
             name: userChat,
-            myName: myUser.Name,
-            myNickName: myUser.nickName,
+            myName: myUser.name,
+            myNickName: myUser.nickname,
             message: message,
-            time: timeNow
+            time: timeNow,
+            server: userChatServer
+
         }
         setUserMassage(user)
-        setMessages(getUserMassage(user.name).message[myUser.Name])
     }
 
     const [userChatPicture, setUserChatPicture] = useState('')
@@ -77,6 +79,9 @@ function ChatPage() {
 
     useEffect (() => {
         setContactsState(myUser.contacts)
+        if(userChat != ''){
+            setUpdateMessage(getUserMassage(myUser.name).contacts.find(x => x.id == userChat).messages)
+        }
     },[myUser])
 
     useEffect(() => {
@@ -96,7 +101,7 @@ function ChatPage() {
                 </div>
                 <AddContacts addNewContacts={addNewContacts} />
                 <Search doSearch={doSearch} Contacts={Contacts} />
-                <MakeContactsList Contacts={filterContacts} set={setUserChat} setUpdateMessage={setUpdateMessage} userName={myUser.Name} setShowInput={setShowInput} myUser={myUser} />
+                <MakeContactsList Contacts={filterContacts} set={setUserChat} setUpdateMessage={setUpdateMessage} userName={myUser.Name} setShowInput={setShowInput} myUser={myUser} setServer={setUserChatServer} />
             </div>
             <div className='container' id='chat-container'>
                 <div variant="outline-light" id='chatUserTop' hidden={showInput}>
