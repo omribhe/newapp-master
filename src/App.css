@@ -1,0 +1,137 @@
+
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: large;
+}
+
+.container{
+  background: -webkit-linear-gradient(45deg, #085078 10%, #85d8ce 90%);
+  background: -moz-linear-gradient(45deg, #085078 10%, #85d8ce 90%);
+  background: -ms-linear-gradient(45deg, #085078 10%, #85d8ce 90%);
+  background: -o-linear-gradient(45deg, #085078 10%, #85d8ce 90%);
+  background: linear-gradient(45deg, #085078 10%, #85d8ce 90%);
+  width: 70%;
+  min-height: 85vh;
+  max-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  box-shadow: rgba(0,0,0,3) 0px 19px 38px, rgba(0,0,0,0.22) 0px 15px 12px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  border-radius: 20px;
+}
+
+
+
+.app-wrapper {
+  background-color: #fff;
+  min-width: 350px;
+  min-height: 600px;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 100px;
+  box-shadow: rgba(0,0,0,3) 0px 19px 38px, rgba(0,0,0,0.22) 0px 15px 12px;
+  max-height: 85vh;
+}
+
+.title {
+  color: #2bb49d;
+  text-align: center;
+  margin: 15px 0px 40px 0px;
+}
+
+.name,.email,.password {
+  margin: 20px;
+  color: #969292;
+  font-size: 16px;
+}
+
+.password {
+  margin-bottom: 40px;
+}
+
+.input {
+  font-size: 20px;
+  outline: none;
+  width: 100%;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom-style: 2px solid black;
+
+}
+
+.error {
+  color: red;
+}
+
+.submit {
+  text-align: center;
+  display: flex;
+  text-transform: uppercase;
+  font-size: 20px;
+  border-radius: 25px;
+  color: white;
+  padding: 10px 60px;
+  background: linear-gradient(to right, #085078 10%, #85d8ce 90%);
+  box-shadow: rgba(0,0,0,3) 0px 19px 38px, rgba(0,0,0,0.22) 0px 15px 12px;
+  margin: auto;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.submit {
+  margin: top 25px; 
+}
+
+
+
+button:active {
+  transform: translateY(2px);
+}
+
+.form-success {
+  display: flex;
+  justify-content: center;
+  margin-top: 250px;
+  min-width: 370px;
+  color: #3290a2;
+  margin-bottom: 110px;
+}
+
+a:link{
+  color:black;
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.allReady {
+
+  float: left;
+  margin-top: 35px;
+  margin-left: 110px;
+  margin-bottom: -5px;
+  margin-right: -100px;
+}
+
+.signUp {
+
+  float: left;
+  margin-top: 35px;
+  margin-left: 90px;
+  margin-bottom: -5px;
+  margin-right: -80px;
+}
+
+#picture {
+  width: 50px;
+}

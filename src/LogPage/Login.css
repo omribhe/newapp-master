@@ -1,0 +1,13 @@
+.form-group {
+    align-content: center;
+    width: 15%;
+    margin-left: 42%;
+    /* fallback for old browsers */
+    background: #6a11cb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgb(153, 114, 196), rgb(101, 125, 167));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgb(154, 101, 211), rgb(66, 115, 199))
+    }
