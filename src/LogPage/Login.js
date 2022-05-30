@@ -9,7 +9,7 @@ import useData from "../data"
 function Login() {
 
  
-  const {setUserLog, getData} = useData();
+  const {setUserLog, getData, setLocalData} = useData();
 
   const [errors, setErrors] = useState({});
 
@@ -29,10 +29,9 @@ function Login() {
     })
   }
 
-  useEffect(() => {
-    
-  })
-  
+  useEffect (() => {
+    setLocalData()
+},[user])
 
   const handleLogin =  (event) => {
     event.preventDefault();

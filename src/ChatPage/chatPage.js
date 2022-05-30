@@ -33,10 +33,12 @@ function ChatPage() {
 
     const [userChatServer, setUserChatServer] = useState()
 
+    const [ renderReact, setRenderReact] = useState(0)
+
 
     const doSearch = function (q) {
-        // setFilterContacts(Contacts.filter((Contacts) => Contacts.includes(q)))
-        setFilterContacts(Contacts)
+        setFilterContacts(Contacts.filter((Contacts) => Contacts.id.includes(q)))
+        console.log(Contacts)
     }
 
     const setUpdateMessage = function (userName) {
@@ -67,6 +69,7 @@ function ChatPage() {
             let temp = [...myUser.contacts, ContactsName]
             setContactsState(temp)
         }
+        setRenderReact(renderReact + 1)
     }
 
     const [showInput, setShowInput] = useState(true)
@@ -75,14 +78,17 @@ function ChatPage() {
     useEffect (() => {
             setLocalData()
             setMyUser(getData({ Name: getUserLog() }))
-    })
+    },[userChat,Contacts,filterContacts,messages,userChatServer])
 
     useEffect (() => {
         setContactsState(myUser.contacts)
+    },[renderReact])
+
+    useEffect (() => {
         if(userChat != ''){
             setUpdateMessage(getUserMassage(myUser.name).contacts.find(x => x.id == userChat).messages)
         }
-    },[myUser])
+    },[myUser,Contacts])
 
     useEffect(() => {
         doSearch('')

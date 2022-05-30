@@ -6,6 +6,7 @@ function Search({doSearch}) {
     const searchBox = useRef(null)
 
     const search = function(){
+        console.log(searchBox.current.value)
         doSearch(searchBox.current.value);
     }
 
