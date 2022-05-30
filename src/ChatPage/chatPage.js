@@ -79,7 +79,7 @@ function ChatPage() {
             setLocalData()
             setMyUser(getData({ Name: getUserLog() }))
     },[userChat,Contacts,filterContacts,messages,userChatServer])
-
+      //test
     useEffect (() => {
         setContactsState(myUser.contacts)
     },[renderReact])
