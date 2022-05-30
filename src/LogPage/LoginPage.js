@@ -7,7 +7,6 @@ import { useState } from 'react';
 
 function LoginPage() {
 
-  const {getData} = useData()
 
   const { setAllUsers } = allUsers();
 
@@ -15,8 +14,7 @@ function LoginPage() {
 
   const handleOnLoad = () => {
     if(userData == null){
-      let userDataVal = getData({name:"omri"})
-      setUserData("omri")
+      setUserData("")     
       setAllUsers()
     }
   }
