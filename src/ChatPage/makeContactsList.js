@@ -7,8 +7,6 @@ import {useEffect, useState} from 'react'
 
 function MakeContactsList(props) {
 
-    const { getData, setData, setUserLog, getUserLog, setUserMassage, getUserMassage, setContacts } = useData()
-
     const handleClick = (name) => {
         props.set(name.id)
         props.setServer(name.server)

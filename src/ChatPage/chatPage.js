@@ -33,12 +33,11 @@ function ChatPage() {
 
     const [userChatServer, setUserChatServer] = useState()
 
-    const [ renderReact, setRenderReact] = useState(0)
+
 
 
     const doSearch = function (q) {
-        setFilterContacts(Contacts.filter((Contacts) => Contacts.id.includes(q)))
-        console.log(Contacts)
+            setFilterContacts(Contacts.filter((Contacts) => Contacts.id.includes(q)))
     }
 
     const setUpdateMessage = function (userName) {
@@ -66,10 +65,7 @@ function ChatPage() {
     const addNewContacts = function (ContactsName, ContactsNickName, Contactserver) {
         if ((getData({ Name: ContactsName }) != null) && (ContactsName != myUser.Name)) {
             setContacts(myUser.name, ContactsName, ContactsNickName, Contactserver, myUser.server)
-            let temp = [...myUser.contacts, ContactsName]
-            setContactsState(temp)
         }
-        setRenderReact(renderReact + 1)
     }
 
     const [showInput, setShowInput] = useState(true)
@@ -78,11 +74,13 @@ function ChatPage() {
     useEffect (() => {
             setLocalData()
             setMyUser(getData({ Name: getUserLog() }))
-    },[userChat,Contacts,filterContacts,messages,userChatServer])
+    })
       //test
     useEffect (() => {
-        setContactsState(myUser.contacts)
-    },[renderReact])
+        if(JSON.stringify(Contacts) != JSON.stringify(myUser.contacts)){
+            setContactsState(myUser.contacts)
+        }
+    },[myUser.contacts])
 
     useEffect (() => {
         if(userChat != ''){

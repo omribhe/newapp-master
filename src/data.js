@@ -188,6 +188,7 @@ const useData = () => {
         }
         let Url = 'https://localhost:7092/api/invitations';
         axios.post(Url, tempObjInvitation ).then(response => response.status).catch(err => console.warn(err));
+
     }
 
 
@@ -204,6 +205,7 @@ const useData = () => {
             }
         }).then(response => response.status, setLocalData()).catch(err => console.warn(err));
         setInitation(userName, ContactsName, Contactserver,myServer)
+
     }
 
 
