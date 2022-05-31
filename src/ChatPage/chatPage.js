@@ -39,12 +39,14 @@ function ChatPage() {
     
 
     const connection = new HubConnectionBuilder()
-    .withUrl('https://localhost:7290/hubs/chatHub'), {
+    .withUrl('https://localhost:7290/hubs/chatHub', {
 
         headers: { "Access-Control-Allow-Origin": "include" },
         mode: "cors"
     })
     .build();
+
+
 
     async function start() {
         try {
@@ -66,12 +68,9 @@ const m2 = useRef();
 useEffect( () => {
     if (!m.current) {
         connection.on("RecieveMessage", async (user,contact,message) => {
-            if (user == UserName){
-                await addPostMessage(message,contact,"false"); //check what it is
-                await getMessages().then(() => setMessages(mes));
-                await getContacts().then(() => setCardsList(data));
-
-
+            if (user == myUser.name){
+                await setLocalData
+                await setMyUser(getData({ Name: getUserLog() }))
             } //check what it is )
         });
         m.current = true;
@@ -82,11 +81,11 @@ useEffect( () => {
     if (!m2.current) {
         connection.on("RecieveContact", async(user,contact,server) => {
             if (user == UserName ) {
-                await AddContactToServer(contact,contact,server);
-                await GetContacts().then(() => setCardsList(data));
+                await setLocalData
+                await setMyUser(getData({ Name: getUserLog() }))
             }
         })
-    }
+}},[]);
 
     const doSearch = function (q) {
             setFilterContacts(Contacts.filter((Contacts) => Contacts.id.includes(q)))
