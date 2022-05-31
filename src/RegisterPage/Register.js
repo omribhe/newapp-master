@@ -5,15 +5,25 @@ import useData from "../data"
 
 
 function Register(){
+  
 
   const [isCreated, setIsCreated] = useState(false);
 
-  const {setUserLog} = useData();
+  const {setUserLog,setLocalData,getData,getUserLog} = useData();
 
   const created = (user) => {
+    setLocalData()
     setUserLog(user); 
+    console.log(getData({ Name: getUserLog() }))
     setIsCreated(true);
   }
+
+  const useEffect = () => {
+    if(isCreated){
+      navigate('/chat')
+    }
+  }
+  
 
     return (
       <div>

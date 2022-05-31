@@ -17,6 +17,8 @@ import AddContacts from '../addContacts/AddContacts';
 import { useNavigate } from "react-router-dom";
 import ChatUserBar from './chatUserBar'
 
+import {personIcon} from "../users/Photo/personIcon.png"
+
 function ChatPage() {
 
     const { getData, setData, setUserLog, getUserLog, setUserMassage, getUserMassage, setContacts, setLocalData } = useData();
@@ -33,6 +35,7 @@ function ChatPage() {
 
     const [userChatServer, setUserChatServer] = useState()
 
+    
 
 
 
@@ -80,7 +83,7 @@ function ChatPage() {
         if(JSON.stringify(Contacts) != JSON.stringify(myUser.contacts)){
             setContactsState(myUser.contacts)
         }
-    },[myUser.contacts])
+    },[myUser])
 
     useEffect (() => {
         if(userChat != ''){
@@ -95,6 +98,9 @@ function ChatPage() {
             setUserChatNickName(userChat)
         }
     }, [Contacts, userChat]);
+
+    
+
 
     return (
         <div className='container' id='users-chat-container'>
@@ -112,7 +118,7 @@ function ChatPage() {
                     <Image id='profileImage' src={userChatPicture} roundedCircle />
                     {userChatNickName}
                 </div>
-                <ToastMessage userName={myUser.Name} messages={messages} writeText={writeText} showInput={showInput} myUser={myUser} />
+                <ToastMessage userName={myUser.name} messages={messages} writeText={writeText} showInput={showInput} myUser={myUser} userChat={userChat} />
             </div>
         </div>
     );

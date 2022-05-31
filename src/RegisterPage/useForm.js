@@ -5,7 +5,7 @@ import personIcon from "../users/Photo/personIcon.png"
 
 const useForm = (props) => {
 
-    const {setData} = useData();
+    const {setData,setLocalData} = useData();
 
     const [users, setUsers] = useState({
         Name: "",
@@ -36,6 +36,7 @@ const useForm = (props) => {
                 picture: personIcon
             })
         }
+        setLocalData()
         setIsCorrect(true);
     }
 
