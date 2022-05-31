@@ -4,7 +4,7 @@ import { ListGroup, Image } from 'react-bootstrap';
 import useData from "../data";
 
 import { Link } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef,signalR } from 'react';
 
 
 
@@ -36,6 +36,8 @@ function ChatPage() {
 
     const [userChatServer, setUserChatServer] = useState()
 
+    const [renderReact, setRenderReact] = useState(true)
+
 
     const connection = new HubConnectionBuilder()
     .withUrl('https://localhost:7092/Hubs/MyHub', {
@@ -53,6 +55,7 @@ function ChatPage() {
             console.log("SignalR Connected");
         }
         catch (err) {
+            setRenderReact(!renderReact)
             console.log(err);
             setTimeout(start,5000);
         }
@@ -67,10 +70,11 @@ const m2 = useRef();
 useEffect( () => {
     if (!m.current) {
         connection.on("RecieveMessage", async (user,contact,message) => {
+
             if (user == myUser.name){
                 await setLocalData
                 await setMyUser(getData({ Name: getUserLog() }))
-            } //check what it is )
+            }
         });
         m.current = true;
     }
@@ -79,11 +83,12 @@ useEffect( () => {
 useEffect( () => {
     if (!m2.current) {
         connection.on("RecieveContact", async(user,contact,server) => {
-            if (user == UserName ) {
+            if (user == myUser.name){
                 await setLocalData
                 await setMyUser(getData({ Name: getUserLog() }))
             }
         })
+        m2.current = true;
 }},[]);
 
     const doSearch = function (q) {
@@ -106,6 +111,7 @@ useEffect( () => {
             server: userChatServer
 
         }
+        setRenderReact(!renderReact)
         setUserMassage(user)
     }
 
@@ -119,12 +125,14 @@ useEffect( () => {
     }
 
     const [showInput, setShowInput] = useState(true)
+    const [userLog,setUserLog2] = useState(getUserLog())
 
 
     useEffect (() => {
+        console.log("print")
             setLocalData()
             setMyUser(getData({ Name: getUserLog() }))
-    })
+    },[Contacts,userChat,filterContacts,userChatServer,userLog,renderReact])
       //test
     useEffect (() => {
         if(JSON.stringify(Contacts) != JSON.stringify(myUser.contacts)){
@@ -136,7 +144,7 @@ useEffect( () => {
         if(userChat != ''){
             setUpdateMessage(getUserMassage(myUser.name).contacts.find(x => x.id == userChat).messages)
         }
-    },[myUser,Contacts])
+    },[userChat,Contacts,renderReact])
 
     useEffect(() => {
         doSearch('')
@@ -165,7 +173,7 @@ useEffect( () => {
                     <Image id='profileImage' src={userChatPicture} roundedCircle />
                     {userChatNickName}
                 </div>
-                <ToastMessage userName={myUser.name} messages={messages} writeText={writeText} showInput={showInput} myUser={myUser} userChat={userChat} />
+                <ToastMessage userName={myUser.name} messages={messages} writeText={writeText} showInput={showInput} myUser={myUser} userChat={userChat} rend={setRenderReact} getRender={renderReact} />
             </div>
         </div>
     );

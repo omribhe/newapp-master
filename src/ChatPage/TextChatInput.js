@@ -4,7 +4,7 @@ import "./chatPage.css"
 import { Image, Button, ButtonGroup, Dropdown, Tooltip } from "react-bootstrap";
 
 
-function TextChat({ writeText, showInput }) {
+function TextChat({ writeText, showInput, rend,getRender}) {
 
     const [hiddeButtons, setHiddeButtons] = useState(true)
 
@@ -17,6 +17,7 @@ function TextChat({ writeText, showInput }) {
     const write = function () {
         writeText({ type: 'text', data: textBox.current.value });
         textBox.current.value = ''
+        rend(!getRender)
     }
 
     const handleChangePicture = (event) => {
