@@ -18,12 +18,6 @@ function Register(){
     setIsCreated(true);
   }
 
-  const useEffect = () => {
-    if(isCreated){
-      navigate('/chat')
-    }
-  }
-  
 
     return (
       <div>
