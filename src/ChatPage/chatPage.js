@@ -37,6 +37,54 @@ function ChatPage() {
     const [userChatServer, setUserChatServer] = useState()
 
 
+    const connection = new HubConnectionBuilder()
+    .withUrl('https://localhost:7290/hubs/chatHub', {
+
+        headers: { "Access-Control-Allow-Origin": "include" },
+        mode: "cors"
+    })
+    .build();
+
+
+
+    async function start() {
+        try {
+            await connection.start();
+            console.log("SignalR Connected");
+        }
+        catch (err) {
+            console.log(err);
+            setTimeout(start,5000);
+        }
+
+        };
+    
+start();
+
+
+const m = useRef();
+const m2 = useRef();
+useEffect( () => {
+    if (!m.current) {
+        connection.on("RecieveMessage", async (user,contact,message) => {
+            if (user == myUser.name){
+                await setLocalData
+                await setMyUser(getData({ Name: getUserLog() }))
+            } //check what it is )
+        });
+        m.current = true;
+    }
+}, []);
+
+useEffect( () => {
+    if (!m2.current) {
+        connection.on("RecieveContact", async(user,contact,server) => {
+            if (user == UserName ) {
+                await setLocalData
+                await setMyUser(getData({ Name: getUserLog() }))
+            }
+        })
+}},[]);
 
     const doSearch = function (q) {
             setFilterContacts(Contacts.filter((Contacts) => Contacts.id.includes(q)))
