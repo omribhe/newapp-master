@@ -38,7 +38,7 @@ function ChatPage() {
 
 
     const connection = new HubConnectionBuilder()
-    .withUrl('https://localhost:7290/hubs/chatHub', {
+    .withUrl('https://localhost:7092/Hubs/myHub', {
 
         headers: { "Access-Control-Allow-Origin": "include" },
         mode: "cors"
