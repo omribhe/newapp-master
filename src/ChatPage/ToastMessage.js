@@ -27,6 +27,14 @@ function ToastMessage(props) {
         }
     }
 
+    const whoSentTheMessage = (sent) => {
+        if(sent){
+            return props.userName
+        } else {
+            return props.userChat
+        }
+    }
+
     if (Object.keys(props.messages).length != 0) {
         return (
             <>
@@ -36,7 +44,7 @@ function ToastMessage(props) {
                             return <Toast id='my-toast'>
                                 <Toast.Header closeButton={false}>
                                     <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-                                    <strong className="me-auto">{message.sent}</strong>
+                                    <strong className="me-auto">{whoSentTheMessage(message.sent)}</strong>
                                     <small>send on - {message.created}</small>
                                 </Toast.Header>
                                 <Toast.Body>{handleText({ "type":"text", "data":message.content})}</Toast.Body>
