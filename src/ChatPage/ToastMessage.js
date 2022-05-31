@@ -61,7 +61,7 @@ function ToastMessage(props) {
 
             <>
                 <div class="px-2 scroll"></div>
-                <TextChat id="textChat" writeText={props.writeText} showInput={props.showInput}></TextChat>
+                <TextChat id="textChat" writeText={props.writeText} showInput={props.showInput} rend={props.setRenderReact} getRender={props.getRender}></TextChat>
             </>
         );
     }
