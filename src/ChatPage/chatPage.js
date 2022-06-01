@@ -22,6 +22,8 @@ import {personIcon} from "../users/Photo/personIcon.png"
 
 function ChatPage() {
 
+    const [render, setRender] = useState(false);
+
     const { getData, setData, setUserLog, getUserLog, setUserMassage, getUserMassage, setContacts, setLocalData } = useData();
 
     const [myUser, setMyUser] = useState(getData({ Name: getUserLog() }))
@@ -40,7 +42,7 @@ function ChatPage() {
 
 
     const connection = new HubConnectionBuilder()
-    .withUrl('https://localhost:7092/Hubs/MyHub', {
+    .withUrl('https://localhost:7092/MyHub', {
 
         headers: { "Access-Control-Allow-Origin": "include" },
         mode: "cors"
@@ -53,43 +55,37 @@ function ChatPage() {
         try {
             await connection.start();
             console.log("SignalR Connected");
+            await setLocalData
+            await setMyUser(getData({ Name: getUserLog() }))
         }
         catch (err) {
-            setRenderReact(!renderReact)
             console.log(err);
-            setTimeout(start,5000);
         }
 
-        };
-    
-start();
+        };  
+useEffect (() => {
+    start();
+},[])
 
 
-const m = useRef();
-const m2 = useRef();
 useEffect( () => {
-    if (!m.current) {
         connection.on("RecieveMessage", async (user,contact,message) => {
-
-            if (user == myUser.name){
                 await setLocalData
                 await setMyUser(getData({ Name: getUserLog() }))
-            }
+                setRenderReact(!renderReact)
+
         });
-        m.current = true;
-    }
-}, []);
+    });
 
 useEffect( () => {
-    if (!m2.current) {
         connection.on("RecieveContact", async(user,contact,server) => {
-            if (user == myUser.name){
                 await setLocalData
                 await setMyUser(getData({ Name: getUserLog() }))
+                setRenderReact(!renderReact)
+
             }
-        })
-        m2.current = true;
-}},[]);
+        )
+});
 
     const doSearch = function (q) {
             setFilterContacts(Contacts.filter((Contacts) => Contacts.id.includes(q)))
@@ -132,7 +128,7 @@ useEffect( () => {
         console.log("print")
             setLocalData()
             setMyUser(getData({ Name: getUserLog() }))
-    },[Contacts,userChat,filterContacts,userChatServer,userLog,renderReact])
+    },[Contacts,userChat,filterContacts,userChatServer,userLog,renderReact,render])
       //test
     useEffect (() => {
         if(JSON.stringify(Contacts) != JSON.stringify(myUser.contacts)){
@@ -173,7 +169,7 @@ useEffect( () => {
                     <Image id='profileImage' src={userChatPicture} roundedCircle />
                     {userChatNickName}
                 </div>
-                <ToastMessage userName={myUser.name} messages={messages} writeText={writeText} showInput={showInput} myUser={myUser} userChat={userChat} rend={setRenderReact} getRender={renderReact} />
+                <ToastMessage userName={myUser.name} messages={messages} writeText={writeText} showInput={showInput} myUser={myUser} userChat={userChat}/>
             </div>
         </div>
     );
