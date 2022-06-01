@@ -14,6 +14,7 @@ const axios = require('axios').default;
 const useData = () => {
 
 
+
     // const setData = (users) => {
     //         let obj = {
     //             Name: users.Name,
@@ -38,7 +39,7 @@ const useData = () => {
             };
         // let Url = 'https://' + users.server + '/api/User';
         let Url = 'https://localhost:7092/api/User';
-        axios.post(Url, tempObjInvitation ).then(response => response.status).catch(err => console.warn(err));
+        axios.post(Url, tempObjInvitation ).then(response => response.status,setLocalData()).catch(err => console.warn(err));
 
 
         const response = await fetch('https://localhost:7092/api/User/', {
@@ -134,7 +135,7 @@ const useData = () => {
             params: {
                 username: user.myName,
             }
-        }).then(response => response.status, setLocalData()).catch(err => console.warn(err));
+        }).then(response => response.status,setLocalData(),).catch(err => console.warn(err));
         setTransferMessage(user)
         return 1
     }
@@ -187,7 +188,7 @@ const useData = () => {
             server: myServer
         }
         let Url = 'https://localhost:7092/api/invitations';
-        axios.post(Url, tempObjInvitation ).then(response => response.status).catch(err => console.warn(err));
+        axios.post(Url, tempObjInvitation ).then(response => response.status, setLocalData()).catch(err => console.warn(err));
 
     }
 
