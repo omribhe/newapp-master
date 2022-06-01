@@ -14,7 +14,6 @@ function Register(){
   const created = (user) => {
     setLocalData()
     setUserLog(user); 
-    console.log(getData({ Name: getUserLog() }))
     setIsCreated(true);
   }
 

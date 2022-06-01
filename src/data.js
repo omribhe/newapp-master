@@ -187,7 +187,7 @@ const useData = () => {
             to: ContactsName,
             server: myServer
         }
-        let Url = 'https://localhost:7092/api/invitations';
+        let Url = 'https:'+Contactserver+'/api/invitations';
         axios.post(Url, tempObjInvitation ).then(response => response.status, setLocalData()).catch(err => console.warn(err));
 
     }

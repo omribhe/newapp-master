@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import ChatUserBar from './chatUserBar'
 import {HubConnectionBuilder} from '@microsoft/signalr';
 
-import {personIcon} from "../users/Photo/personIcon.png"
+import {personIcon} from "../users/Photo/benPic.jpeg"
 
 function ChatPage() {
 
@@ -54,7 +54,6 @@ function ChatPage() {
     async function start() {
         try {
             await connection.start();
-            console.log("SignalR Connected");
             await setLocalData
             await setMyUser(getData({ Name: getUserLog() }))
         }
@@ -68,9 +67,11 @@ useEffect (() => {
 },[])
 
 
+
+
+
 useEffect( () => {
         connection.on("RecieveMessage", async (user,contact,message) => {
-            console.log(user)
                 await setLocalData()
                 setTimeout(setMyUser(getData({ Name: myUser.name })),2000)
                 setRenderReact(!renderReact)
@@ -80,7 +81,6 @@ useEffect( () => {
 
 useEffect( () => {
         connection.on("RecieveContact", async(user,contact,server) => {
-            console.log(user)
                 await setLocalData()
                 setTimeout(setMyUser(getData({ Name: myUser.name })),2000)
                 setRenderReact(!renderReact)
@@ -88,6 +88,14 @@ useEffect( () => {
             }
         )
 });
+
+
+
+async function rend() {
+        setTimeout(setLocalData(),500)
+        setTimeout(setMyUser(getData({ Name: myUser.name })),1500)
+    };  
+
 
     const doSearch = function (q) {
             setFilterContacts(Contacts.filter((Contacts) => Contacts.id.includes(q)))
@@ -111,15 +119,17 @@ useEffect( () => {
         }
         setRenderReact(!renderReact)
         setUserMassage(user)
+        rend()
     }
 
     const [userChatPicture, setUserChatPicture] = useState('')
     const [userChatNickName, setUserChatNickName] = useState('')
 
     const addNewContacts = function (ContactsName, ContactsNickName, Contactserver) {
-        if ((getData({ Name: ContactsName }) != null) && (ContactsName != myUser.Name)) {
+        if (ContactsName != myUser.Name) {
             setContacts(myUser.name, ContactsName, ContactsNickName, Contactserver, myUser.server)
         }
+        rend()
     }
 
     const [showInput, setShowInput] = useState(true)
@@ -129,7 +139,6 @@ useEffect( () => {
 
 
     useEffect (() => {
-        console.log("print")
             setLocalData()
             setMyUser(getData({ Name: getUserLog() }))
     },[Contacts,userChat,filterContacts,userChatServer,userLog,renderReact,render])
