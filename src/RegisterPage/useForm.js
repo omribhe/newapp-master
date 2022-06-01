@@ -2,6 +2,7 @@ import React,  {useState, useEffect} from "react";
 import Check from "./checkValidation";
 import useData from "../data";
 import personIcon from "../users/Photo/personIcon.png"
+import personIcon1 from "../users/Photo/benPic.jpeg"
 
 const useForm = (props) => {
 
@@ -30,12 +31,12 @@ const useForm = (props) => {
     const handleFormSubmit = (event, setUserData, userData) => {
         event.preventDefault();
         setErrors(Check(users,setUserData,userData));
-        if (users.picture == '') {
+        // if (users.picture == '') {
             setUsers({
                 ...users,
                 picture: personIcon
             })
-        }
+        // }
         setLocalData()
         setIsCorrect(true);
     }
@@ -57,6 +58,7 @@ const useForm = (props) => {
     useEffect(() => {
         if(Object.keys(errors).length === 0 && isCorrect) {
             setData(users);
+            console.log(users)
             props.created({Name:users.Name, password:users.password});
         }
     }, [errors])
