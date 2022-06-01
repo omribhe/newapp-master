@@ -70,8 +70,9 @@ useEffect (() => {
 
 useEffect( () => {
         connection.on("RecieveMessage", async (user,contact,message) => {
-                await setLocalData
-                await setMyUser(getData({ Name: getUserLog() }))
+            console.log(user)
+                await setLocalData()
+                setTimeout(setMyUser(getData({ Name: myUser.name })),2000)
                 setRenderReact(!renderReact)
 
         });
@@ -79,8 +80,9 @@ useEffect( () => {
 
 useEffect( () => {
         connection.on("RecieveContact", async(user,contact,server) => {
-                await setLocalData
-                await setMyUser(getData({ Name: getUserLog() }))
+            console.log(user)
+                await setLocalData()
+                setTimeout(setMyUser(getData({ Name: myUser.name })),2000)
                 setRenderReact(!renderReact)
 
             }
@@ -122,6 +124,8 @@ useEffect( () => {
 
     const [showInput, setShowInput] = useState(true)
     const [userLog,setUserLog2] = useState(getUserLog())
+
+
 
 
     useEffect (() => {
