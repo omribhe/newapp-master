@@ -31,6 +31,7 @@ function Login() {
 
   useEffect (() => {
     setLocalData()
+    setUserData(getData(user))
 },[user])
 
   const handleLogin =  (event) => {
