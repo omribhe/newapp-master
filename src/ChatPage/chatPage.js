@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import ChatUserBar from './chatUserBar'
 import {HubConnectionBuilder} from '@microsoft/signalr';
 
-import {personIcon} from "../users/Photo/benPic.jpeg"
+import {personIcon} from "../users/Photo/personIcon.png"
 
 function ChatPage() {
 

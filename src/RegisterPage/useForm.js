@@ -1,8 +1,8 @@
 import React,  {useState, useEffect} from "react";
 import Check from "./checkValidation";
 import useData from "../data";
-import personIcon1 from "../users/Photo/personIcon.png"
-import personIcon from "../users/Photo/benPic.jpeg"
+import personIcon from "../users/Photo/personIcon.png"
+import personIcon1 from "../users/Photo/benPic.jpeg"
 
 const useForm = (props) => {
 
