@@ -1,3 +1,4 @@
+
 import useData from "../data";
 import { validPassword , validUserName } from "../Regex/Regex";
 
@@ -5,15 +6,15 @@ import { validPassword , validUserName } from "../Regex/Regex";
 const Check = (users,setUserData, userData) => {
     let size = 8
     let errors={};
-    const {getData, setData} = useData(); 
+    const {getData} = useData(); 
 
     if(!users.Name){
         errors.Name="user Name is required."
     } else if (!validUserName.test(users.Name)){
         errors.Name="Only English characters or numbers are allowed."
     } else {
-        getData(users, setUserData)
-        if(userData != null){
+        console.log(getData(users))
+        if((getData({Name:users.Name}) != null)){
             errors.Name="This name allready taken."
         }
     }

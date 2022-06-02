@@ -20,7 +20,7 @@ function Register(){
 
     return (
       <div>
-        {!isCreated ? (<RegisterForm created={created}/>) : (<CreateSuccses/>)}
+        {!isCreated ? (<RegisterForm onLoad={setLocalData} created={created}/>) : (<CreateSuccses/>)}
       </div>
     );
   }
