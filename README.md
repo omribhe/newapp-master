@@ -14,7 +14,9 @@ RUN:
 
 To start the project, you will need to open both this repository and the server.
 To open this repository, either clone the project through an IDE or download the files as ZIP and then extract them to your computer.
-Opening the server will be the same procedure, and then **run the server side first**.
+Opening the server will be the same procedure.
+
+**run the server side first**.
 
 After downloading, open the terminal in the current directory and run the following command: "npm install react-scripts".
 
