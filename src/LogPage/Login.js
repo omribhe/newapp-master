@@ -3,11 +3,11 @@ import CheckLogin from "./CheckLogin";
 import {useState, useEffect} from 'react'
 import { useNavigate ,Outlet} from "react-router-dom";
 import useData from "../data"
+import allUsers from "../users/allUsers";
 
 
 
 function Login() {
-
  
   const {setUserLog, getData, setLocalData} = useData();
 
@@ -29,10 +29,11 @@ function Login() {
     })
   }
 
+
   useEffect (() => {
     setLocalData()
     setUserData(getData(user))
-},[user])
+},[user,isCorrect])
 
   const handleLogin =  (event) => {
     event.preventDefault();
@@ -40,6 +41,7 @@ function Login() {
     setUserData(userDataVal)
     setErrors(CheckLogin(user, userData));
     if(Object.keys(errors).length === 0){
+      setUserLog(user);
       setIsCorrect(true)
     }
   }
